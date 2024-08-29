@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CarouselAppBarExample(),
     );
@@ -15,326 +18,283 @@ class MyApp extends StatelessWidget {
 }
 
 class CarouselAppBarExample extends StatelessWidget {
+  const CarouselAppBarExample({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black,
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              // SliverPersistentHeader for the "Avatarro" text and "PRO" button
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 60.0,
-                  maxHeight: 60.0,
-                  child: Container(
-                    color: Colors.black,
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Avatarro",
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text("PRO"),
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
-              // SliverAppBar with the carousel
-              SliverPersistentHeader(
-                // expandedHeight: 250.0,
-                pinned: false,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 0.0,
-                  maxHeight: 250.0,
-                  child: PageView(
-                    padEnds: true,
-                    allowImplicitScrolling: true,
-                    reverse: true,
-                    // fit: StackFit.expand,
-                    children: <Widget>[
-                      Container(
-                        color: Colors.red,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Image.network(
-                              'https://avatars.githubusercontent.com/u/103445587?v=4',
-                              fit: BoxFit.cover,
-                            ),
-                          ],
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            // SliverPersistentHeader for the "Avatarro" text and "PRO" button
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverAppBarDelegate(
+                minHeight:
+                    screenWidth > 600 ? screenWidth * 0.07 : screenWidth * 0.07,
+                maxHeight:
+                    screenWidth > 600 ? screenWidth * 0.07 : screenWidth * 0.07,
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  color: Colors.black,
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Avatarro",
+                        style: TextStyle(
+                          fontSize: screenWidth > 600
+                              ? screenWidth * 0.035
+                              : screenWidth * 0.05,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                       Container(
-                        color: Colors.blue,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Image.network(
-                              'https://avatars.githubusercontent.com/u/103445587?v=4',
-                              fit: BoxFit.cover,
-                            ),
-                          ],
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Colors.blue, Colors.purple],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius:
+                              BorderRadius.circular(screenWidth * 0.04),
                         ),
-                      ),
-                      Container(
-                        color: Colors.blue,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Image.network(
-                              'https://avatars.githubusercontent.com/u/103445587?v=4',
-                              fit: BoxFit.cover,
-                            ),
-                          ],
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth > 600
+                              ? screenWidth * 0.04
+                              : screenWidth * 0.04,
+                          // vertical: screenHeight * 0.01,
                         ),
-                      ),
-                      Container(
-                        color: Colors.blue,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Image.network(
-                              'https://avatars.githubusercontent.com/u/103445587?v=4',
-                              fit: BoxFit.cover,
+                        child: Center(
+                          child: Text(
+                            'PRO',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: screenWidth > 600
+                                  ? screenWidth * 0.02
+                                  : screenWidth * 0.04,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
+            ),
 
-              // SliverPersistentHeader for "Most popular Al filters" text
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 90.0,
-                  maxHeight: 100.0,
-                  child: Container(
-                    color: Colors.black,
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Most popular Al filters',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Icon(Icons.search, color: Colors.white)
-                          ],
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text('All'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.grey.withOpacity(0.3),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10.0),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text('Women fashion'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.grey.withOpacity(0.3),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10.0),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text('Sexy'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.grey.withOpacity(0.3),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10.0),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text('Superhero'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.grey.withOpacity(0.3),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // SizedBox(height: 16.0),
-                      ],
-                    ),
-                  ),
+            // SliverAppBar with the carousel
+            SliverPersistentHeader(
+              pinned: false,
+              delegate: _SliverAppBarDelegate(
+                minHeight: 0.0,
+                maxHeight: screenHeight * 0.3,
+                child: PageView(
+                  children: <Widget>[
+                    buildCarouselItem(
+                        'https://avatars.githubusercontent.com/u/103445587?v=2',
+                        screenWidth,
+                        screenHeight),
+                    buildCarouselItem(
+                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        screenWidth,
+                        screenHeight),
+                    buildCarouselItem(
+                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        screenWidth,
+                        screenHeight),
+                    buildCarouselItem(
+                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        screenWidth,
+                        screenHeight),
+                  ],
                 ),
               ),
+            ),
 
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
+            // SliverPersistentHeader for "Most popular AI filters" text
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverAppBarDelegate(
+                minHeight: screenWidth>600? screenHeight * 0.1: screenHeight * 0.12,
+                maxHeight: screenWidth>600? screenHeight * 0.1: screenHeight * 0.12,
+                child: Container(
+                  color: Colors.black,
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                  alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 16.0),
-                      GridView.count(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        children: <Widget>[
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'Evening dress',
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Most popular AI filters',
+                            style: TextStyle(
+                              fontSize: screenWidth > 600
+                                  ? screenWidth * 0.03
+                                  : screenWidth * 0.05,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'EU Vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'White vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'EU Vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'EU Vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'White vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'EU Vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=4',
-                            title: 'EU Vintage',
-                          ),
-                          FilterItem(
-                            image:
-                                'https://avatars.githubusercontent.com/u/103445587?v=3',
-                            title: 'EU Vintage',
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.search,
+                                color: Colors.white,
+                                size: screenWidth > 600
+                                    ? screenWidth * 0.04
+                                    : screenWidth * 0.06),
                           ),
                         ],
                       ),
+                      screenWidth>600? SizedBox(
+                          height:
+                              screenHeight * 0.01):const SizedBox.shrink(),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: <Widget>[
+                            buildFilterButton('All', screenWidth),
+                            buildFilterButton('Women fashion', screenWidth),
+                            buildFilterButton('Sexy', screenWidth),
+                            buildFilterButton('Superhero', screenWidth),
+                            buildFilterButton('Fashion', screenWidth),
+                            buildFilterButton('3D', screenWidth),
+                            buildFilterButton('Superhero', screenWidth),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+
+            SliverToBoxAdapter(
+              child: ResponsiveRowsView(),
+            ),
+          ],
         ),
-        bottomNavigationBar: Material(
-          elevation: 2,
-          color: Colors.transparent,
-          child: SizedBox(
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(
-                  Icons.home,
-                  size: 20,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.camera,
-                  size: 45,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.settings,
-                  size: 20,
-                  color: Colors.white,
-                ),
-              ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        items: [
+          BottomNavigationBarItem(
+            icon: ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                      colors: [Colors.blue, Colors.purple],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(bounds),
+                child: Icon(Icons.home,
+                    size: screenWidth>600? screenWidth * 0.05:screenWidth*0.07, color: Colors.white)),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                      colors: [Colors.blue, Colors.purple],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(bounds),
+              child: Icon(Icons.camera,
+                  size: screenWidth>600? screenWidth * 0.07:screenWidth*0.1, color: Colors.white),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings,
+                size: screenWidth>600? screenWidth * 0.05:screenWidth*0.07, color: Colors.white),
+            label: '',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: const Color(0xFF8E6EFF),
+        unselectedItemColor: Colors.grey,
+      ),
+    );
+  }
+
+  Widget buildCarouselItem(
+      String imageUrl, double screenWidth, double screenHeight) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Colors.black,
+      ),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              height: screenHeight * 0.3, // Adjust height based on screen size
+              width: screenWidth * 0.9,
             ),
           ),
-        )
+          Positioned(
+            bottom: 20,
+            left: 0,
+            child: Container(color: Colors.transparent,
+            padding: EdgeInsets.only(left: 10,right: 10),
+            width: screenWidth *0.9,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+              Text("AI Avatars",style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: screenWidth > 600
+                  ? screenWidth * 0.02
+                  : screenWidth *
+                      0.04, // Adjust text size based on screen width
+            ),),
+              CircleAvatar(
+                backgroundColor: Colors.purple,
+                child: Text("Try", style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: screenWidth > 600
+                    ? screenWidth * 0.02
+                    : screenWidth *
+                        0.04, // Adjust text size based on screen width
+                            ),),
+              )
+                        ],),
+            ))
+        ],
+      ),
+    );
+  }
 
-        // BottomNavigationBar(
-        //   backgroundColor: Colors.black,
-        //   items: [
-
-        //     BottomNavigationBarItem(
-        //       icon: Icon(
-        //         Icons.home,
-        //         size: 15,
-        //       ),
-        //       // label: 'Home',
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.camera_alt, size: 35),
-        //       // label: 'Camera',
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.settings, size: 15),
-        //       // label: 'Settings',
-        //     ),
-        //   ],
-        //   currentIndex: 0,
-        //   selectedItemColor: Color(0xFF8E6EFF),
-        //   unselectedItemColor: Colors.grey,
-        // ),
-
-        );
+  Widget buildFilterButton(String label, double screenWidth) {
+    return Padding(
+      padding: EdgeInsets.only(right: screenWidth * 0.03),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text(label),
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey.withOpacity(0.3),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenWidth * 0.04),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03,
+            vertical: screenWidth * 0.02,
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -377,35 +337,266 @@ class FilterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          // image: DecorationImage(
-          //   image: NetworkImage(image),
-          //   fit: BoxFit.cover,
-          // ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.18,
-              width: MediaQuery.of(context).size.width * 0.3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  image,
-                  fit: BoxFit.fitHeight,
-                ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(screenWidth * 0.04),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height:
+                screenWidth > 600 ? screenHeight * 0.3 : screenHeight * 0.18,
+            width: screenWidth * 0.3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(screenWidth * 0.04),
+              child: Image.network(
+                image,
+                fit: BoxFit.cover,
               ),
             ),
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+          ),
+          const SizedBox(height: 10), // Space between image and text
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: screenWidth > 600
+                  ? screenWidth * 0.02
+                  : screenWidth *
+                      0.04, // Adjust text size based on screen width
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.01),
+        ],
+      ),
+    );
+  }
+}
+
+// class ResponsiveGridView extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return LayoutBuilder(
+//       builder: (context, constraints) {
+//         int crossAxisCount;
+//         if (constraints.maxWidth > 600) {
+//           crossAxisCount = 3; // Medium screens
+//         } else {
+//           crossAxisCount = 2; // Small screens
+//         }
+
+//         final screenWidth = MediaQuery.of(context).size.width;
+
+//         return Padding(
+//           padding: EdgeInsets.all(screenWidth * 0.04),
+//           child: GridView.builder(
+//             shrinkWrap: true,
+//             physics: NeverScrollableScrollPhysics(),
+//             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//               crossAxisCount: crossAxisCount,
+//               crossAxisSpacing: screenWidth * 0.04,
+//               mainAxisSpacing: screenWidth * 0.04,
+//               childAspectRatio:0.7
+//             ),
+//             itemCount: 9, // Number of items in the grid
+//             itemBuilder: (context, index) {
+//               return FilterItem(
+//                 image: 'https://avatars.githubusercontent.com/u/103445587?v=4',
+//                 title: 'Item $index',
+//               );
+//             },
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+class ResponsiveRowsView extends StatelessWidget {
+  ResponsiveRowsView({super.key});
+  final List title = [
+    'Doctor Superhero',
+    'Bed Purple SuperHero',
+    'Pool SuperHero',
+    'Hammer SuperHero',
+    'Doctor Superhero',
+    'Bed Purple SuperHero',
+    'Pool SuperHero',
+    'Hammer SuperHero',
+    'Hammer SuperHero',
+    'Doctor Superhero',
+    'Bed Purple SuperHero',
+    'Pool SuperHero',
+    'Hammer SuperHero',
+    'Doctor Superhero',
+    'Bed Purple SuperHero',
+    'Pool SuperHero',
+    'Hammer SuperHero',
+    'Pool SuperHero'
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final isWideScreen = constraints.maxWidth > 600;
+        final itemsPerRow = isWideScreen ? 3 : 2;
+
+        // Creating a list of items
+        final items = List.generate(
+            18,
+            (index) => FilterItem(
+                  image:
+                      'https://avatars.githubusercontent.com/u/103445587?v=4',
+                  title: title[index],
+                ));
+
+        // Splitting items into rows
+        List<Widget> rows = [];
+        for (int i = 0; i < items.length; i += itemsPerRow) {
+          rows.add(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: items
+                  .sublist(
+                      i,
+                      (i + itemsPerRow) > items.length
+                          ? items.length
+                          : (i + itemsPerRow))
+                  .map((item) => Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.02),
+                          child: item,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          );
+
+          // Add a special row after every 3 rows of items
+          if ((i + itemsPerRow) % (itemsPerRow * 3) == 0) {
+            rows.add(
+              Container(
+                // color: Colors.black,
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Colors.blue, Colors.purple],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(screenWidth * 0.04),
+                ),
+                padding: EdgeInsets.symmetric(
+                    vertical: screenWidth * 0.01,
+                    horizontal: screenWidth * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.diamond,
+                          color: Colors.white,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Upgrade to pro',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth > 600
+                                    ? screenWidth * 0.02
+                                    : screenWidth * 0.03,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'No ads and best image quality',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth > 600
+                                    ? screenWidth * 0.02
+                                    : screenWidth * 0.03,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: screenWidth > 600
+                          ? screenWidth * 0.035
+                          : screenWidth * 0.05,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.purple,
+                        radius: screenWidth > 600
+                            ? screenWidth * 0.033
+                            : screenWidth * 0.048,
+                        child: CircleAvatar(
+                          // borderRadius: BorderRadius.circular(20),
+                          backgroundColor: Colors.white,
+                          radius: screenWidth > 600
+                              ? screenWidth * 0.03
+                              : screenWidth * 0.045,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "GO",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: screenWidth > 600
+                                      ? screenWidth * 0.017
+                                      : screenWidth * 0.02,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                        ),
+                      ),
+                    )
+
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   child: Text('Button'),
+                    //   style: ElevatedButton.styleFrom(
+                    //     foregroundColor: Colors.white,
+                    //     backgroundColor: Colors.blue,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius:
+                    //           BorderRadius.circular(screenWidth * 0.04),
+                    //     ),
+                    //     padding: EdgeInsets.symmetric(
+                    //       horizontal: screenWidth * 0.04,
+                    //       vertical: screenWidth * 0.02,
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-            )
-          ],
-        ));
+            );
+          }
+        }
+
+        return Padding(
+          padding: EdgeInsets.all(screenWidth * 0.04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: rows,
+          ),
+        );
+      },
+    );
   }
 }
