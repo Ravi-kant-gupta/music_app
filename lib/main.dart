@@ -99,19 +99,19 @@ class CarouselAppBarExample extends StatelessWidget {
                 child: PageView(
                   children: <Widget>[
                     buildCarouselItem(
-                        'https://avatars.githubusercontent.com/u/103445587?v=2',
+                        'assets/image_1.png',
                         screenWidth,
                         screenHeight),
                     buildCarouselItem(
-                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        'assets/image_2.png',
                         screenWidth,
                         screenHeight),
                     buildCarouselItem(
-                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        'assets/image_3.png',
                         screenWidth,
                         screenHeight),
                     buildCarouselItem(
-                        'https://avatars.githubusercontent.com/u/103445587?v=4',
+                        'assets/image_1.png',
                         screenWidth,
                         screenHeight),
                   ],
@@ -234,7 +234,7 @@ class CarouselAppBarExample extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               fit: BoxFit.cover,
               height: screenHeight * 0.3, // Adjust height based on screen size
@@ -353,7 +353,7 @@ class FilterItem extends StatelessWidget {
             width: screenWidth * 0.3,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(screenWidth * 0.04),
-              child: Image.network(
+              child: Image.asset(
                 image,
                 fit: BoxFit.cover,
               ),
@@ -452,7 +452,7 @@ class ResponsiveRowsView extends StatelessWidget {
             18,
             (index) => FilterItem(
                   image:
-                      'https://avatars.githubusercontent.com/u/103445587?v=4',
+                      'assets/image_3.png',
                   title: title[index],
                 ));
 

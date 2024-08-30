@@ -1,4 +1,4 @@
-# music_app
+# Avatarro
 
 A new Flutter project.
 

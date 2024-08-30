@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:music_app/home_controller.dart';
+// import 'package:Avatarro/home_controller.dart';
 // import 'package:share_plus/share_plus.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
